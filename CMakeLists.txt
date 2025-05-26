@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
-project(test)
+project(Bot-Barista-Cpp)
 
 # Imposta C++20 come standard
 set(CMAKE_CXX_STANDARD 20)
@@ -32,4 +32,4 @@ endif()
 # Imposta il percorso di output
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(test src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp)
