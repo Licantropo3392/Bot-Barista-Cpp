@@ -18,7 +18,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_compile_options(-O3 -g0)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_options(-O0 -g)
-# else()
+elseif (MSVC)
+    message(WARNING "MSVC non usa build types.")
+else()
     # message(WARNING "CMAKE_BUILD_TYPE non impostato su Release o Debug. Usa -DCMAKE_BUILD_TYPE=Release o -DCMAKE_BUILD_TYPE=Debug per ottimizzare.")
 endif()
 
@@ -28,7 +30,7 @@ if(NOT N EQUAL 0)
     set(CMAKE_BUILD_PARALLEL_LEVEL ${N})
 endif()
 
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}) # CLion :(
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
