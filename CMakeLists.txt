@@ -1,35 +1,34 @@
 cmake_minimum_required(VERSION 3.31)
 project(Bot-Barista-Cpp)
 
-# Imposta C++20 come standard
 set(CMAKE_CXX_STANDARD 20)
+
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Imposta Ninja come generatore
-set(CMAKE_GENERATOR "Ninja")
-
-# Ottimizzazioni per la build
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
+if(MSVC)
+    add_compile_options(/W4)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+    add_compile_options(-Wall -Wextra -Wpedantic)
+else()
+    message(WARNING "Compilatore non riconosciuto! Usa MSVC, GCC o Clang per una configurazione ottimale.")
+endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY /cmake-build-release)
+    add_compile_options(-O3 -g0)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_options(-O0 -g)
+# else()
+    # message(WARNING "CMAKE_BUILD_TYPE non impostato su Release o Debug. Usa -DCMAKE_BUILD_TYPE=Release o -DCMAKE_BUILD_TYPE=Debug per ottimizzare.")
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY /cmake-build-debug)
-endif()
-
-# Abilita la compilazione parallela
 include(ProcessorCount)
 ProcessorCount(N)
 if(NOT N EQUAL 0)
     set(CMAKE_BUILD_PARALLEL_LEVEL ${N})
 endif()
 
-# Imposta il percorso di output
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
