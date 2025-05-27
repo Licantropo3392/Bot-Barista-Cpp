@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.31)
 project(Bot-Barista-Cpp)
 
 set(CMAKE_CXX_STANDARD 20)
-
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -21,7 +20,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
 elseif (MSVC)
     message(WARNING "MSVC non usa build types.")
 else()
-    # message(WARNING "CMAKE_BUILD_TYPE non impostato su Release o Debug. Usa -DCMAKE_BUILD_TYPE=Release o -DCMAKE_BUILD_TYPE=Debug per ottimizzare.")
+    message(WARNING "CMAKE_BUILD_TYPE non impostato su Release o Debug. Usa -DCMAKE_BUILD_TYPE=Release o -DCMAKE_BUILD_TYPE=Debug per ottimizzare.")
 endif()
 
 include(ProcessorCount)
