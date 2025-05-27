@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string> // Visual Studio supporta getline solo con questa libreria :(
 
 const short sconto = 10;
 
