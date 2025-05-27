@@ -2,6 +2,7 @@
 
 const short sconto = 10;
 
+// Modifica con i nomi desiderati
 const std::string amici[] = {
     "Marco",
     "Paolo",
@@ -12,11 +13,20 @@ const std::string amici[] = {
     "Giulia",
     "Giovanni",
     "Giacomo",
+    "Denis",
+    "Raffaele",
+    "Daniel"
 };
 
 struct Prodotto {
     std::string nome;
     float prezzo;
+};
+
+const Prodotto prodotti[] = {
+    { "Coca Cola", 2.50f },
+    { "Fanta", 2.00f },
+    { "Sprite", 1.75f },
 };
 
 int main() {
@@ -40,12 +50,6 @@ int main() {
             std::cout << "Benvenuto " << nome << std::endl;
         }
     }
-
-    const Prodotto prodotti[] = {
-        { "Coca Cola", 2.50f },
-        { "Fanta", 2.00f },
-        { "Sprite", 1.75f },
-    };
 
     for (short i = 0; i < std::size(prodotti); i++) {
         if (scontato) {
